@@ -1,0 +1,183 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #fff;
+}
+  
+.topbar {
+    background-color: #000;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+  
+.topbar .username {
+    font-size: 1.1rem;
+}
+  
+.navbar {
+    background-color: #dcdcdc;
+    display: flex;
+    gap: 20px;
+    padding: 12px 20px;
+    font-size: 1rem;
+  }
+  
+  .navbar a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .navbar a:hover {
+    text-decoration: underline;
+  }
+  
+  .profile-actions {
+    margin-left: auto;
+    display: flex;
+    gap: 15px;
+  }
+  
+  .profile-actions a {
+    color: #333;
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  
+  .header-banner {
+    height: 220px;
+    background: url('https://via.placeholder.com/1200x220') center/cover no-repeat;
+  }
+  
+  .container {
+    padding: 40px 60px;
+  }
+  
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+    margin: 0;
+  }
+  
+  .create-btn,
+  .status-btn {
+    background-color: #2d2e42;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .status-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .status-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    color: black;
+    border: 1px solid #ccc;
+    font-size: 0.95rem;
+    padding: 5px;
+    border-radius: 6px;
+    display: none;
+    width: 100%;
+    z-index: 10;
+  }
+  
+  .status-btn:hover .status-dropdown {
+    display: block;
+  }
+  
+  .status-dropdown option:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+  }
+  
+  .status {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: green;
+    cursor: pointer;
+  }
+  
+  .status:hover {
+    color: #2d2e42;
+    text-decoration: underline;
+  }
+  
+  .science-plan {
+    background-color: #dcdcdc;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .science-plan .details {
+    max-width: 70%;
+  }
+  
+  .science-plan .details h3 {
+    margin: 0 0 10px;
+  }
+  
+  .science-plan .details p {
+    margin: 4px 0;
+    font-size: 0.95rem;
+    color: #555;
+  }
+  
+  .science-plan .status-block {
+    text-align: right;
+  }
+  
+  .submit-btn {
+    background-color: #2d2e42;
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 6px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  
+  .details-link {
+    display: block;
+    font-size: 0.85rem;
+    color: #555;
+    margin-top: 6px;
+  }
+  
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  
+.header-banner {
+    width:100%;
+    height: auto;
+}
+
+.banner-image {
+    width: 100%;  /* Ensures the image stretches across the full width */
+    height: auto;  /* Maintains the aspect ratio */
+}
