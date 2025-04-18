@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OCS System</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div class="navbar-top">
+      <div class="title">OCS SYSTEM</div>
+      <div class="user-info">
+        <span>Gemini4</span>
+        <a href="#" class="icon-button">Edit Profile</a>
+        <a href="#" class="icon-button">Logout</a>
+      </div>
+    </div>
+
+    <div class="navbar-bottom">
+      <a href="#">Home</a>
+      <a href="#">Science Plan</a>
+      <a href="#">Astronomer</a>
+      <a href="#">Star System</a>
+    </div>
+
+    <div class="background-image">
+      <!-- Background image goes here -->
+    </div>
+  </header>
+
+  <main>
+    <div class="top-bar">
+      <h1>Science Plans</h1>
+      <div class="filter-dropdown">
+        <button class="filter-btn" onclick="toggleDropdown()">Status ▾</button>
+        <div class="dropdown-content" id="statusDropdown">
+          <label class="dropdown-item">
+            <input type="checkbox" onchange="handleFilter(this)">
+            <span class="checkmark">✔</span> Created
+          </label>
+          <label class="dropdown-item">
+            <input type="checkbox" onchange="handleFilter(this)">
+            <span class="checkmark">✔</span> Tested
+          </label>
+          <label class="dropdown-item">
+            <input type="checkbox" onchange="handleFilter(this)">
+            <span class="checkmark">✔</span> Submitted
+          </label>
+          <label class="dropdown-item">
+            <input type="checkbox" onchange="handleFilter(this)">
+            <span class="checkmark">✔</span> Validated
+          </label>
+          <label class="dropdown-item">
+            <input type="checkbox" onchange="handleFilter(this)">
+            <span class="checkmark">✔</span> Running
+          </label>
+          <label class="dropdown-item">
+            <input type="checkbox" onchange="handleFilter(this)">
+            <span class="checkmark">✔</span> Invalidated
+          </label>
+          <label class="dropdown-item">
+            <input type="checkbox" onchange="handleFilter(this)">
+            <span class="checkmark">✔</span> Complete
+          </label>
+          <label class="dropdown-item">
+            <input type="checkbox" onchange="handleFilter(this)">
+            <span class="checkmark">✔</span> Cancelled
+          </label>
+        </div>
+      </div>
+      
+    </div>
+
+  
+    <div class="science-plan-container">
+      <!-- Conditional: if no plans -->
+      
+      <div class="message-box">
+        <span class="close-button">×</span>
+        <p>There are no currently submitted science plan</p>
+        <button class="create-btn">Create Science Plan</button>
+      </div>
+      
+    
+      <!-- If science plans exist -->
+      <div class="science-plan-card" data-status="CREATED">
+        <div class="left">
+          <h3>[SP0001] Gemini OCS 101</h3>
+          <p><strong>Objective:</strong></p>
+          <p>Available Date: 11 June 2025 - 20 December 2025</p>
+        </div>
+        <div class="right">
+          <p class="status created">CREATED</p>
+          <button class="submit-btn">Submit</button>
+          <a href="#" class="detail-link">More Detail >></a>
+        </div>
+      </div>
+
+    
+      <div class="science-plan-card">
+        <div class="left">
+          <h3>[SP0002] Gemini OCS 102</h3>
+          <p><strong>Objective:</strong></p>
+          <p>Available Date: 11 June 2025 - 20 December 2025</p>
+        </div>
+        <div class="right">
+          <p class="status tested">TESTED</p>
+          <button class="submit-btn">Submit</button>
+          <a href="#" class="detail-link">More Detail >></a>
+        </div>
+      </div>
+    
+    </div>
+
+
+      <!-- Submit confirmation Submit Science Plan -->
+      <div id="confirmSubmitModal" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal('confirmSubmitModal')">&times;</span>
+          <p>Do you want to submit this science plan?</p>
+          <div class="btn-group">
+            <button class="cancel-btn" onclick="closeModal('confirmSubmitModal')">Cancel</button>
+            <button class="confirm-btn">Confirm</button>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Not tested modal -->
+      <div id="notTestedModal" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal('notTestedModal')">&times;</span>
+          <p>This science plan is not tested yet.</p>
+          <button class="confirm-btn" onclick="goTestPlan()">Go Test science plan</button>
+        </div>
+      </div>  
+
+  </main>
+</body>
+</html>
+<script>
+  function toggleDropdown() {
+    const dropdown = document.getElementById("statusDropdown");
+    dropdown.classList.toggle("show");
+  }
+  
+  function handleFilter(checkbox) {
+    const label = checkbox.parentElement;
+    label.classList.toggle("selected", checkbox.checked);
+  }
+
+  document.querySelectorAll(".submit-btn").forEach((btn) => {
+    btn.addEventListener("click", function () {
+      const card = this.closest(".science-plan-card");
+      const status = card.getAttribute("data-status");
+
+      if (status === "TESTED") {
+        document.getElementById("confirmSubmitModal").style.display = "flex";
+      } else {
+        document.getElementById("notTestedModal").style.display = "flex";
+      }
+    });
+  });
+
+  function closeModal(id) {
+    document.getElementById(id).style.display = "none";
+  }
+
+  function goTestPlan() {
+    window.location.href = "/test-science-plan"; // Change to your actual test page
+  }
+
+  </script>
+  
+
