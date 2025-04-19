@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OCS SYSTEM</title>
+  <link rel="stylesheet" th:href="@{/CSS/style.css}" />
+</head>
+<body>
+
+<div class="topbar">
+  <div>OCS SYSTEM</div>
+  <div class="username">Gemini4</div>
+</div>
+
+<div class="navbar">
+  <a href="#">Home</a>
+  <a href="#">Science Plan</a>
+  <a href="#">Astronomer</a>
+  <a href="#">Star System</a>
+  <div class="profile-actions">
+    <a href="#">👤 Edit Profile</a>
+    <a href="#">Logout ⎋</a>
+  </div>
+</div>
+
+<div class="header-banner">
+  <img th:src="@{/Image/notion-banner.png}" alt="Header Image" class="banner-image">
+</div>
+
+<div class="container">
+  <div class="section-header">
+    <h2 class="section-title">Science Plans</h2>
+    <div class="action-buttons">
+      <button class="create-btn">Create</button>
+      <button class="status-btn">
+        <span class="status-icon">💬</span>
+        Status
+        <div class="status-dropdown">
+          <option value="all">All</option>
+          <option value="created">Created</option>
+          <option value="tested">Tested</option>
+          <option value="submitted">Submitted</option>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <!-- Thymeleaf iteration for Science Plans -->
+  <div class="science-plan" th:each="plan : ${sciencePlans}">
+    <div class="details">
+      <h3 th:text="'[SP' + ${plan.planNo} + '] ' + ${plan.creator}"></h3>
+      <p><strong>Objective:</strong> <span th:text="${plan.objectives}"></span></p>
+      <p th:text="'Available Date: ' + ${plan.startDate} + ' - ' + ${plan.endDate}"></p>
+    </div>
+    <div class="status-block">
+      <div class="status" th:text="${plan.status}"></div>
+      <button class="submit-btn" th:disabled="${plan.status == 'SUBMITTED'}">Submit</button>
+      <a href="#" class="details-link">More Detail &gt;&gt;</a>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
