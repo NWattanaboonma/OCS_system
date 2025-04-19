@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Science Plan - Page 2</title>
+  <link rel="stylesheet" href="./../../CSS/CreateSciencePlan.css">
+</head>
+<body>
+  <div class="topbar">
+    <div>OCS SYSTEM</div>
+    <div class="username">Gemini4</div>
+  </div>
+  
+  <div class="navbar">
+    <a href="#">Home</a>
+    <a href="#">Science Plan</a>
+    <a href="#">Astronomer</a>
+    <a href="#">Star System</a>
+    <div class="profile-actions">
+      <a href="#">👤 Edit Profile</a>
+      <a href="#">Logout ⎋</a>
+    </div>
+  </div>
+
+  <h1 class="page-title">Create a new Science Plans</h1>
+  <div class="container">
+    <form id="page2Form" method="post" action="/submit-science-plan">
+      <div class="form-group"><label>FileType</label><select name="fileType"><option>Choose file type</option></select></div>
+      <div class="form-group"><label>FileQuality</label><select name="fileQuality"><option>Choose file quality</option></select></div>
+      <div class="form-group"><label>ColorType</label><select name="colorType"><option>Choose the color type</option></select></div>
+      <div class="form-group"><label>Contrast</label><input name="contrast" type="number" placeholder="Enter the decimal value"></div>
+      <div class="form-group"><label>Brightness</label><input name="brightness" type="number" placeholder="Enter the decimal value"></div>
+      <div class="form-group"><label>Saturation</label><input name="saturation" type="number" placeholder="Enter the decimal value"></div>
+      <div class="form-group"><label>Highlights</label><input name="highlights" type="number" placeholder="Enter the decimal value"></div>
+      <div class="form-group"><label>Exposure</label><input name="exposure" type="number" placeholder="Enter the decimal value"></div>
+      <div class="form-group"><label>Shadows</label><input name="shadows" type="number" placeholder="Enter the decimal value"></div>
+      <div class="form-group"><label>Whites</label><input name="whites" type="number" placeholder="Enter the decimal value"></div>
+      <div class="form-group"><label>Blacks</label><input name="blacks" type="number" placeholder="Enter the decimal value"></div>
+      <div class="form-group"><label>Luminance</label><input name="luminance" type="number" placeholder="Enter the decimal value"></div>
+      <div class="form-group"><label>Hue</label><input name="hue" type="number" placeholder="Enter the decimal value"></div>
+      <!-- <div class="buttons">
+        <a href="page1.html" class="back">Back</a>
+        <button type="reset" class="reset">Reset</button>
+        <button type="button" class="edit">Edit</button>
+        <button type="submit" class="save">Save</button>
+      </div> -->
+      <div class="button-row">
+        <div class="left-buttons">
+          <a href="page1.html" class="back">Back</a>
+          <button type="reset" class="reset">Reset</button>
+        </div>
+        <div class="right-buttons">
+          <button type="button" class="edit" onclick="window.location.href='page1.html'">Edit</button>
+          <button type="submit" class="save">Save</button>
+        </div>
+      </div>
+      
+    </form>
+  </div>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const stored = localStorage.getItem('page1Data');
+      if (stored) {
+        const page1Data = JSON.parse(stored);
+        const form = document.getElementById('page2Form');
+        for (const key in page1Data) {
+          const hidden = document.createElement('input');
+          hidden.type = 'hidden';
+          hidden.name = key;
+          hidden.value = page1Data[key];
+          form.appendChild(hidden);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

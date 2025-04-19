@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Science Plan - Page 1</title>
+  <link rel="stylesheet" href="./../../CSS/CreateSciencePlan.css">
+</head>
+<body>
+  <div class="topbar">
+    <div>OCS SYSTEM</div>
+    <div class="username">Gemini4</div>
+  </div>
+  
+  <div class="navbar">
+    <a href="#">Home</a>
+    <a href="#">Science Plan</a>
+    <a href="#">Astronomer</a>
+    <a href="#">Star System</a>
+    <div class="profile-actions">
+      <a href="#">👤 Edit Profile</a>
+      <a href="#">Logout ⎋</a>
+    </div>
+  </div>
+
+  <h1 class="page-title">Create a new Science Plans</h1>
+  <div class="container">
+    <form id="page1Form">
+      <div class="form-group"><label>Plan Name</label><input name="planName" type="text" placeholder="Enter the Plan Name"></div>
+      <div class="form-group"><label>Creator</label><input name="creator" type="text" value="Jane Bole"></div>
+      <div class="form-group"><label>Funding</label><input name="funding" type="text" placeholder="Enter the funding cost"></div>
+      <div class="form-group"><label>Objective</label><input name="objective" type="text" placeholder="Enter the Objective"></div>
+      <div class="form-group"><label>Start Date</label><input name="startDate" type="date"></div>
+      <div class="form-group"><label>End Date</label><input name="endDate" type="date"></div>
+      <div class="form-group"><label>Telescope Assigned</label><select name="telescope"><option>Choose Telescope location</option></select></div>
+      <div class="form-group"><label>Target</label><select name="target"><option>Choose Target Star System</option></select></div>
+      <!-- <div class="buttons">
+        <button type="button" class="back">Back</button>
+        <button type="reset" class="reset">Reset</button>
+        <button type="button" class="next" onclick="goToPage2()">Next</button>
+      </div> -->
+      <div class="button-row">
+        <div class="left-buttons">
+          <button type="button" class="back">Back</button>
+          <button type="reset" class="reset">Reset</button>
+        </div>
+        <div class="right-buttons">
+          <button type="button" class="next" onclick="goToPage2()">Next</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    function goToPage2() {
+      const form = document.getElementById('page1Form');
+      const data = new FormData(form);
+      const obj = {};
+      data.forEach((val, key) => obj[key] = val);
+      localStorage.setItem('page1Data', JSON.stringify(obj));
+      window.location.href = 'page2.html';
+    }
+  </script>
+</body>
+</html>
