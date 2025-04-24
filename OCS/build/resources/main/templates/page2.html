@@ -26,19 +26,39 @@
   <h1 class="page-title">Create a new Science Plans</h1>
   <div class="container">
     <form id="page2Form" method="post" action="/submit-science-plan">
-      <div class="form-group"><label>FileType</label><input name="fileType" type="text" placeholder="Enter the file type"></div>
-      <div class="form-group"><label>FileQuality</label><input name="fileQuality" type="text" placeholder="Enter the file quality"></div>
-      <div class="form-group"><label>ColorType</label><input name="colorType" type="text" placeholder="Enter the color type"></div>
-      <div class="form-group"><label>Contrast</label><input name="contrast" type="number" step="0.01" placeholder="Enter the decimal value"></div>
-      <div class="form-group"><label>Brightness</label><input name="brightness" type="number" step="0.01" placeholder="Enter the decimal value"></div>
-      <div class="form-group"><label>Saturation</label><input name="saturation" type="number" step="0.01" placeholder="Enter the decimal value"></div>
-      <div class="form-group"><label>Highlights</label><input name="highlights" type="number" step="0.01" placeholder="Enter the decimal value"></div>
-      <div class="form-group"><label>Exposure</label><input name="exposure" type="number" step="0.01" placeholder="Enter the decimal value"></div>
-      <div class="form-group"><label>Shadows</label><input name="shadows" type="number" step="0.01" placeholder="Enter the decimal value"></div>
-      <div class="form-group"><label>Whites</label><input name="whites" type="number" step="0.01" placeholder="Enter the decimal value"></div>
-      <div class="form-group"><label>Blacks</label><input name="blacks" type="number" step="0.01" placeholder="Enter the decimal value"></div>
-      <div class="form-group"><label>Luminance</label><input name="luminance" type="number" step="0.01" placeholder="Enter the decimal value"></div>
-      <div class="form-group"><label>Hue</label><input name="hue" type="number" step="0.01" placeholder="Enter the decimal value"></div>
+      <div class="form-group">
+        <label>FileType</label>
+        <select name="fileType" required>
+          <option value="" disabled selected>Choose File Type</option>
+          <option value="JPEG">JPEG</option>
+          <option value="PNG">PNG</option>
+          <option value="FITS">FITS</option>
+        </select>
+      </div>
+      <div class="form-group"><label>FileQuality</label>
+        <select name="fileQuality" required>
+          <option value="" disabled selected>Choose File Quality</option>
+          <option value="Low">Low</option>
+          <option value="Fine">Fine</option>
+        </select>
+      </div>
+      <div class="form-group"><label>ColorType</label>
+        <select name="colorType" required>
+          <option value="" disabled selected>Choose Color Type</option>
+          <option value="Color mode">Color Mode</option>
+          <option value="B&W mode">B&W Mode</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Contrast</label><input name="contrast" type="number" step="0.01" value="0.00" placeholder="Enter the decimal value"></div>
+      <div class="form-group"><label>Brightness</label><input name="brightness" type="number" step="0.01" value="0.00" placeholder="Enter the decimal value"></div>
+      <div class="form-group"><label>Saturation</label><input name="saturation" type="number" step="0.01" value="0.00" placeholder="Enter the decimal value"></div>
+      <div class="form-group"><label>Highlights</label><input name="highlights" type="number" step="0.01" value="0.00" placeholder="Enter the decimal value"></div>
+      <div class="form-group"><label>Exposure</label><input name="exposure" type="number" step="0.01" value="0.00" placeholder="Enter the decimal value"></div>
+      <div class="form-group"><label>Shadows</label><input name="shadows" type="number" step="0.01" value="0.00" placeholder="Enter the decimal value"></div>
+      <div class="form-group"><label>Whites</label><input name="whites" type="number" step="0.01" value="0.00" placeholder="Enter the decimal value"></div>
+      <div class="form-group"><label>Blacks</label><input name="blacks" type="number" step="0.01" value="0.00" placeholder="Enter the decimal value"></div>
+      <div class="form-group"><label>Luminance</label><input name="luminance" type="number" step="0.01" value="0.00" placeholder="Enter the decimal value"></div>
+      <div class="form-group"><label>Hue</label><input name="hue" type="number" step="0.01" value="0.00" placeholder="Enter the decimal value"></div>
       <!-- <div class="buttons">
         <a href="page1.html" class="back">Back</a>
         <button type="reset" class="reset">Reset</button>

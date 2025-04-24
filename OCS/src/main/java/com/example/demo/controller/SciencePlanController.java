@@ -6,13 +6,16 @@ import edu.gemini.app.ocs.OCS;
 import edu.gemini.app.ocs.model.DataProcRequirement;
 import edu.gemini.app.ocs.model.SciencePlan;
 import edu.gemini.app.ocs.model.StarSystem;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -22,6 +25,7 @@ public class SciencePlanController {
 //    @Autowired
 //    private DemoApplication demoApplication;
     private static OCS ocs = new OCS(true);
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
     @GetMapping("/science-plans")
     public String getSciencePlans(Model model) {
@@ -55,9 +59,18 @@ public class SciencePlanController {
         // String fields (can be null or empty)
         String creator = emptyToNull(formData.get("creator"));
         String submitter = emptyToNull(formData.get("submitter"));
+        submitter = "Ching Bole";   // FOR DEBUG ONLY
+
         String objectives = emptyToNull(formData.get("objective"));
+
+//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String startDate = emptyToNull(formData.get("startDate"));
+        LocalDateTime startDateParsed = parseDate(startDate);
+        String formattedStartDate = startDateParsed.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+
         String endDate = emptyToNull(formData.get("endDate"));
+        LocalDateTime endDateParsed = parseDate(endDate);
+        String formattedEndDate = endDateParsed.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
         // Numeric fields
         double fundingInUSD = parseOrDefault((formData.get("funding")));
@@ -91,8 +104,8 @@ public class SciencePlanController {
         System.out.println("Creator: " + creator);
         System.out.println("Submitter: " + submitter);
         System.out.println("Objectives: " + objectives);
-        System.out.println("Start Date: " + startDate);
-        System.out.println("End Date: " + endDate);
+        System.out.println("Start Date: " + formattedStartDate);
+        System.out.println("End Date: " + formattedEndDate);
         System.out.println("Funding in USD: " + fundingInUSD);
         System.out.println("Star System: " + starSystem);
         System.out.println("Telescope Location: " + telescopeLocation);
@@ -106,15 +119,17 @@ public class SciencePlanController {
                 .setFundingInUSD(fundingInUSD)
                 .setObjective(objectives)
                 .setStarSystem(starSystem)
-                .setStartDate(startDate)
-                .setEndDate(endDate)
+//                .setStartDate(formattedStartDate)
+//                .setEndDate(formattedEndDate)
+                .setStartDate(formattedStartDate != null ? formattedStartDate : "1900-01-01 00:00:00")
+                .setEndDate(formattedEndDate != null ? formattedEndDate : "1900-01-01 00:00:00")
                 .setTelescopeLocation(telescopeLocation)
                 .setDataProcessing(new ArrayList<>(List.of(dr)))
                 .setStatus(status)
                 .build();
 
         System.out.println("Science Plan created: " + sciencePlan.getDetail());
-        //ocs.createSciencePlan(sciencePlan); ยังเเอดไม่ได้ งง
+        ocs.createSciencePlan(sciencePlan);
         System.out.println(ocs.getAllSciencePlans());
         return "redirect:/science-plans";
     }
@@ -139,6 +154,22 @@ public class SciencePlanController {
         }
     }
 
+    private LocalDateTime parseDate(String dateStr) {
+        try {
+//            return (dateStr == null || dateStr.trim().isEmpty()) ? null : LocalDateTime.parse(dateStr.trim(), DATE_TIME_FORMATTER);
+            if (dateStr == null || dateStr.trim().isEmpty()) {
+                return null;
+            }
+            if (dateStr.contains("T")) {
+                return LocalDateTime.parse(dateStr);
+            } else {
+                return LocalDateTime.parse(dateStr.trim(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+            }
+        } catch (DateTimeParseException e) {
+            System.out.println("Date parsing failed: " + dateStr);
+            return null;
+        }
+    }
 
 }
 

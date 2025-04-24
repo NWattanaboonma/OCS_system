@@ -71,21 +71,23 @@ public class SciencePlanBuilder {
 
     public SciencePlanBuilder setStartDate(String startDate) {
         try {
-            this.startDate = (new SimpleDateFormat("dd/MM/yyyy HH:mm:ss")).parse(startDate);
+            this.startDate = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).parse(startDate);
         } catch (ParseException e) {
             throw new IllegalArgumentException("Invalid start date format", e);
         }
         return this;
     }
 
+
     public SciencePlanBuilder setEndDate(String endDate) {
         try {
-            this.endDate = (new SimpleDateFormat("dd/MM/yyyy HH:mm:ss")).parse(endDate);
+            this.endDate = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).parse(endDate);
         } catch (ParseException e) {
             throw new IllegalArgumentException("Invalid end date format", e);
         }
         return this;
     }
+
 
     public SciencePlanBuilder setTelescopeLocation(SciencePlan.TELESCOPELOC telescopeLocation) {
         this.telescopeLocation = telescopeLocation;
