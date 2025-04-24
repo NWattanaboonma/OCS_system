@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.text.AttributedString;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -80,6 +81,10 @@ public class SciencePlanController {
         com.example.demo.model.SciencePlan.TELESCOPELOC telescopeLocation = parseEnum(
                 formData.get("telescope"), com.example.demo.model.SciencePlan.TELESCOPELOC.class
         );
+
+        if (telescopeLocation == null) {
+            throw new IllegalArgumentException("Telescope location must not be null");
+        }
 
         // DataProcRequirement: all Double fields nullable
         DataProcRequirement dr = new DataProcRequirement(

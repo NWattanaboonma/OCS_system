@@ -84,7 +84,11 @@
         data.forEach((val, key) => {
             if (key === 'startDate' || key === 'endDate') {
                 if (val) {
-                    obj[key] = val.replace('T', ' ') + ':00';  // Add seconds
+                    let formatted = val.replace('T', ' ');
+                    if (formatted.length === 16) {
+                        formatted += ':00'; // Ensure it becomes 'yyyy-MM-dd HH:mm:ss'
+                    }
+                    obj[key] = formatted;
                 } else {
                     obj[key] = null;
                 }
