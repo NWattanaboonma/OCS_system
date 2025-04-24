@@ -1,26 +1,48 @@
 package com.example.demo.model;
 
+import edu.gemini.app.ocs.model.AstronomicalData;
+import edu.gemini.app.ocs.model.DataProcRequirement;
+import edu.gemini.app.ocs.model.StarSystem;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 public class SciencePlanBuilder {
 
-    private String planID;
-    private String planName;
-    private String creator;
-    private String submitter;
-    private double funding;
-    private String objective;
-    private String target;
-    private String startDate;
-    private String endDate;
-    private String telescopeLocation;
-    private String dataProcessing;
-    private String status;
+//    private String planID;
+//    private String planName;
+//    private String creator;
+//    private String submitter;
+//    private double funding;
+//    private String objective;
+//    private List<Star> target;
+//    private DateTimeFormatter startDate;
+//    private DateTimeFormatter endDate;
+//    private enumeration.TelescopeLocation telescopeLocation;
+//    private DataProcessing dataProcessing;
+//    private enumeration.Status status;
+    int planNo;
+    String creator;
+    String submitter;
+    double fundingInUSD;
+    String objectives;
+    StarSystem.CONSTELLATIONS starSystem;
+    Date startDate;
+    Date endDate;
+    SciencePlan.TELESCOPELOC telescopeLocation;
+    ArrayList<DataProcRequirement> dataProcRequirements = new ArrayList<>();
+//    private AstronomicalData astroData = new AstronomicalData();
+    SciencePlan.STATUS status;
 
     // --- Builder Methods ---
-
-    public SciencePlanBuilder setPlanName(String planName) {
-        this.planName = planName;
-        return this;
-    }
+//    public SciencePlanBuilder setPlanName(String planName) {
+//        this.planName = planName;
+//        return this;
+//    }
 
     public SciencePlanBuilder setCreator(String creator) {
         this.creator = creator;
@@ -32,67 +54,64 @@ public class SciencePlanBuilder {
         return this;
     }
 
-    public SciencePlanBuilder setFunding(double funding) {
-        this.funding = funding;
+    public SciencePlanBuilder setFundingInUSD(double funding) {
+        this.fundingInUSD = funding;
         return this;
     }
 
     public SciencePlanBuilder setObjective(String objective) {
-        this.objective = objective;
+        this.objectives = objective;
         return this;
     }
 
-    public SciencePlanBuilder setTarget(String target) {
-        this.target = target;
+    public SciencePlanBuilder setStarSystem(StarSystem.CONSTELLATIONS target) {
+        this.starSystem = target;
         return this;
     }
 
     public SciencePlanBuilder setStartDate(String startDate) {
-        this.startDate = startDate;
+        try {
+            this.startDate = (new SimpleDateFormat("dd/MM/yyyy HH:mm:ss")).parse(startDate);
+        } catch (ParseException e) {
+            throw new IllegalArgumentException("Invalid start date format", e);
+        }
         return this;
     }
 
     public SciencePlanBuilder setEndDate(String endDate) {
-        this.endDate = endDate;
+        try {
+            this.endDate = (new SimpleDateFormat("dd/MM/yyyy HH:mm:ss")).parse(endDate);
+        } catch (ParseException e) {
+            throw new IllegalArgumentException("Invalid end date format", e);
+        }
         return this;
     }
 
-    public SciencePlanBuilder setTelescopeLocation(String telescopeLocation) {
+    public SciencePlanBuilder setTelescopeLocation(SciencePlan.TELESCOPELOC telescopeLocation) {
         this.telescopeLocation = telescopeLocation;
         return this;
     }
 
-    public SciencePlanBuilder setDataProcessing(String dataProcessing) {
-        this.dataProcessing = dataProcessing;
+    public SciencePlanBuilder setDataProcessing(ArrayList<DataProcRequirement> dataProcessing) {
+        this.dataProcRequirements = dataProcessing;
         return this;
     }
 
-    public SciencePlanBuilder setStatus(String status) {
+    public SciencePlanBuilder setStatus(SciencePlan.STATUS status) {
         this.status = status;
         return this;
     }
 
     // --- Build Method ---
     public SciencePlan build() {
-        this.planID = generatePlanID();
-        return new SciencePlan(
-                planID,
-                planName,
-                creator,
-                submitter,
-                funding,
-                objective,
-                target,
-                startDate,
-                endDate,
-                telescopeLocation,
-                dataProcessing,
-                status
-        );
+        this.planNo = generatePlanID();
+        return new SciencePlan(this);
     }
 
     // --- ID Generator ---
-    private String generatePlanID() {
-        return "SP-" + System.currentTimeMillis();
+    private int generatePlanID() {
+        return (int) (System.currentTimeMillis() % Integer.MAX_VALUE);
     }
+
+    //add data processing
 }
