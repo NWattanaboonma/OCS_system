@@ -139,6 +139,11 @@ public class SciencePlanController {
         }
     }
 
-
+    @PostMapping("/submit-science-plan/{planId}")
+    @ResponseBody
+    public String submitSciencePlan(@PathVariable int planId) {
+        ocs.updateSciencePlanStatus(planId, SciencePlan.STATUS.SUBMITTED);
+        return "success";
+    }
 }
 
