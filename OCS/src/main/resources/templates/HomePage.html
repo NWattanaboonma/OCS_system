@@ -65,7 +65,7 @@
         <div class="status" th:text="${plan.status}"></div>
 
         <!-- Only show submit if status is TESTED -->
-        <th:block th:if="${#strings.trim(plan.status) == 'SAVED'}">
+        <th:block th:if="${#strings.trim(plan.status) == 'TESTED'}">
           <button class="submit-btn"
                   th:attr="data-plan-id=${plan.planNo}"
                   onclick="openModal('confirmSubmitModal',  this)">
