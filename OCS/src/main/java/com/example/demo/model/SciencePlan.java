@@ -113,7 +113,8 @@ public class SciencePlan extends edu.gemini.app.ocs.model.SciencePlan {
 //
 //        return eDate;
 //    }
-//
+
+
 //    public void setEndDate(String endDate) {
 //        try {
 //            this.endDate = (new SimpleDateFormat("dd/MM/yyyy HH:mm:ss")).parse(endDate);
@@ -181,6 +182,79 @@ public class SciencePlan extends edu.gemini.app.ocs.model.SciencePlan {
 //    public int hashCode() {
 //        return Objects.hash(new Object[]{this.planNo, this.creator, this.submitter, this.fundingInUSD, this.objectives, this.starSystem, this.startDate, this.endDate, this.telescopeLocation, this.dataProcRequirements, this.astroData, this.status});
 //    }
+
+    @Override
+    public String getCreator() {
+        return this.creator;
+    }
+
+    @Override
+    public String getSubmitter() {
+        return this.submitter;
+    }
+
+    @Override
+    public String getObjectives() {
+        return this.objectives;
+    }
+
+    @Override
+    public double getFundingInUSD() {
+        return this.fundingInUSD;
+    }
+
+    @Override
+    public STATUS getStatus() {
+        return this.status;
+    }
+
+    @Override
+    public String getStartDate() {
+        String sDate = null;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            sDate = formatter.format(this.startDate);
+        } catch (Exception var4) {
+            sDate = "-1";
+        }
+        return sDate;
+    }
+
+    @Override
+    public String getEndDate() {
+        String eDate = null;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            eDate = formatter.format(this.endDate);
+        } catch (Exception var4) {
+            eDate = "-1";
+        }
+        return eDate;
+    }
+
+    @Override
+    public StarSystem.CONSTELLATIONS getStarSystem() {
+        return this.starSystem;
+    }
+
+    @Override
+    public TELESCOPELOC getTelescopeLocation() {
+        return this.telescopeLocation;
+    }
+
+    @Override
+    public ArrayList<DataProcRequirement> getDataProcRequirements() {
+        // Convert your nested ArrayList to the format expected by OCS
+        ArrayList<DataProcRequirement> result = new ArrayList<>();
+        if (this.dataProcRequirements != null && !this.dataProcRequirements.isEmpty()) {
+            for (ArrayList<DataProcRequirement> innerList : this.dataProcRequirements) {
+                if (innerList != null) {
+                    result.addAll(innerList);
+                }
+            }
+        }
+        return result;
+    }
 
     public String getDetail() {
 //        if (this.creator != null && this.submitter != null && this.objectives != null && this.starSystem != null && this.startDate != null && this.endDate != null && this.telescopeLocation != null && this.dataProcRequirements != null && this.status != null) {

@@ -28,10 +28,10 @@
     <form id="page1Form" onsubmit="return false;">
 <!--      <div class="form-group"><label>Plan Name</label><input name="planName" type="text" placeholder="Enter the Plan Name"></div>-->
       <div class="form-group"><label>Creator</label><input name="creator" type="text" value="Jane Bole" ></div>
-      <div class="form-group"><label>Funding</label><input name="funding" type="text" placeholder="Enter the funding cost" ></div>
+      <div class="form-group"><label>Funding</label><input name="funding" type="text" placeholder="Enter the funding cost in USD" ></div>
       <div class="form-group"><label>Objective</label><input name="objective" type="text" placeholder="Enter the Objective" ></div>
-      <div class="form-group"><label>Start Date</label><input name="startDate" type="text" ></div>
-      <div class="form-group"><label>End Date</label><input name="endDate" type="text" ></div>
+      <div class="form-group"><label>Start Date</label><input name="startDate" type="datetime-local" class="form-control" step="1"></div>
+      <div class="form-group"><label>End Date</label><input name="endDate" type="datetime-local" class="form-control" step="1"></div>
       <div class="form-group">
         <label for="telescope">Telescope Assigned</label>
         <select name="telescope" id="telescope" class="form-control" >
@@ -59,7 +59,7 @@
       </div> -->
       <div class="button-row">
         <div class="left-buttons">
-          <button type="button" class="back">Back</button>
+          <button type="button" class="back" style="display: none;">Back</button>
           <button type="reset" class="reset">Reset</button>
         </div>
         <div class="right-buttons">
@@ -80,7 +80,22 @@
       const form = document.getElementById('page1Form');
       const data = new FormData(form);
       const obj = {};
-      data.forEach((val, key) => obj[key] = val === "" ? null : val);
+      // data.forEach((val, key) => obj[key] = val === "" ? null : val);
+        data.forEach((val, key) => {
+            if (key === 'startDate' || key === 'endDate') {
+                if (val) {
+                    let formatted = val.replace('T', ' ');
+                    if (formatted.length === 16) {
+                        formatted += ':00'; // Ensure it becomes 'yyyy-MM-dd HH:mm:ss'
+                    }
+                    obj[key] = formatted;
+                } else {
+                    obj[key] = null;
+                }
+            } else {
+                obj[key] = val === "" ? null : val;
+            }
+        });
       localStorage.setItem('page1Data', JSON.stringify(obj));
       window.location.href = '/SciencePlan-page2';
     }
